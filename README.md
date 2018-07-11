@@ -1,4 +1,6 @@
 # PRHawkDemo
+# If solutuon does not work, please try to update username:token string in below given file
+https://github.com/tharakeswararaogoru/PRHawkDemo/blob/master/Services/Manager/HttpHandler.cs
 
 # Required Framework
 1) Visual Studio 2015
