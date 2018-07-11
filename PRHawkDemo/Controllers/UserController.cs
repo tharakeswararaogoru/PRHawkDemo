@@ -39,7 +39,7 @@ namespace PRHawkDemo.Controllers
         /// <param name="per_page">pagination params</param>
         /// <param name="gridPage">internal parameter to handle pagination in the page</param>
         /// <returns></returns>
-        public async Task<ActionResult> Index(string username, int page = 1, int per_page=2, int gridPage=1)
+        public async Task<ActionResult> Index(string username, int page = 1, int per_page=30, int gridPage=1)
         {
             if (string.IsNullOrEmpty(username))
             {
@@ -57,7 +57,7 @@ namespace PRHawkDemo.Controllers
                 }
 
                 // Pagination logic
-                model = userAvailableRepos.Repos.ToPagedList(gridPage, 1);
+                model = userAvailableRepos.Repos.ToPagedList(gridPage, 10);
                 ViewBag.Page = page;
                 ViewBag.PerPage = per_page;
                 return View("Index", model);
