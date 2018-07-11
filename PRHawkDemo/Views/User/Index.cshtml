@@ -1,0 +1,71 @@
+﻿@*@using PRHawkDemo.Models;
+@model PRHawkModel*@
+@using PagedList.Mvc
+@model  PagedList.IPagedList<Services.Model.UserRepo> 
+
+
+@{
+    ViewBag.Title = "Home Page";
+}
+<style>
+    .ul.pagination {
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+    }
+
+    ul.pagination li {
+        display: inline;
+    }
+
+        ul.pagination li a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: background-color .3s;
+        }
+
+            ul.pagination li a.active {
+                background-color: #4CAF50;
+                color: white;
+            }
+
+            ul.pagination li a:hover:not(.active) {
+                background-color: #ddd;
+            }
+</style>
+
+ 
+
+<div class="jumbotron">
+    <p class="lead">Github User Repository List</p>
+</div>
+<div class="row">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Repo Name</th>
+                <th>Pull Requests</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(int i= 0;i< Model.Count;i++)
+            {
+                var pull_url = Model[i].html_url + "/pulls";
+                <tr>
+                    <th scope="row"><a href="@Model[i].html_url">@Model[i].name</a></th>
+                    <td><a href="@pull_url">@Model[i].PullRequests.Count</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div id="container" style="margin-left: 20px">
+    <p></p>
+    <p></p>
+    <div class="pagination" style="margin-left: 400px">
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+        of @Model.PageCount   @Html.PagedListPager(Model, gridPage => Url.Action("Index", new { gridPage }))
+    </div>
+</div> 
