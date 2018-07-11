@@ -110,7 +110,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Manager\GitHubManager.cs" />
     <Compile Include="Manager\HttpHandler.cs" />
     <Compile Include="Manager\IGitHubManager.cs" />
