@@ -1,6 +1,6 @@
 # PRHawkDemo
 
-# Required Tool
+# Required Framework
 1) Visual Studio 2015
 
 # Dependency Packages 
