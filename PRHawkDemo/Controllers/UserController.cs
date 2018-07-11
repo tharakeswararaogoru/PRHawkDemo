@@ -35,15 +35,16 @@ namespace PRHawkDemo.Controllers
         /// Default Action to view user repo details
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="page"></param>
-        /// <param name="per_page"></param>
+        /// <param name="page">pagination params</param>
+        /// <param name="per_page">pagination params</param>
+        /// <param name="gridPage">internal parameter to handle pagination in the page</param>
         /// <returns></returns>
         public async Task<ActionResult> Index(string username, int page = 1, int per_page=2, int gridPage=1)
         {
             if (string.IsNullOrEmpty(username))
             {
                 // Username is not passed
-                return View("Error", new HandleErrorInfo(new Exception("Please try with valid route. E.g. /username/{username}"), "User", "Index"));
+                return View("Error", new HandleErrorInfo(new Exception("Please try with valid route. like /user/{username}"), "User", "Index"));
             }
             try
             {
@@ -54,24 +55,17 @@ namespace PRHawkDemo.Controllers
                 {
                     return View("Error", new HandleErrorInfo(new Exception("Internal Error"), "User", "Index"));
                 }
-                //PRHawkModel prHawkModel = new PRHawkModel();
-                //prHawkModel.UserRepos = userRepos.Repos;
 
                 // Pagination logic
                 model = userAvailableRepos.Repos.ToPagedList(gridPage, 1);
+                ViewBag.Page = page;
+                ViewBag.PerPage = per_page;
                 return View("Index", model);
             }
             catch (Exception)
             {
                 return View("Error", new HandleErrorInfo(new Exception("Internal Error"), "User", "Index"));
             }
-        }
-
-
-        public ActionResult Pagination(int page, int per_page)
-        {
-            IPagedList<UserRepo> model = userAvailableRepos.Repos.ToPagedList(page, per_page);
-            return View("Index", model);
-        }
+        }   
     }
 }

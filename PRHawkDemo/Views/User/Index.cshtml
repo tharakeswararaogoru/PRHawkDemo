@@ -66,6 +66,8 @@
     <p></p>
     <div class="pagination" style="margin-left: 400px">
         Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
-        of @Model.PageCount   @Html.PagedListPager(Model, gridPage => Url.Action("Index", new { gridPage }))
+        of @Model.PageCount   @Html.PagedListPager(Model, gridPage => Url.Action("Index",
+                             new RouteValueDictionary(
+    new { controller = "User", action = "Index", page = ViewBag.Page, per_page = ViewBag.PerPage, gridPage = gridPage })))
     </div>
 </div> 
